@@ -5,6 +5,6 @@ import { Home } from "./pages/index";
 export default function App() {
   const [todos, setTodos] = useState([]);
   return (
-    <Home todos={todos} />
+    <Home todos={todos} setTodos={setTodos} />
   );
 }

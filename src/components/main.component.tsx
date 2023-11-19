@@ -10,13 +10,25 @@ export default function Main({ todos }: Readonly<{ todos: string[] | never[] }>)
           <ul className="todo-list">
             { /* These are here just to show the structure of the list items */ }
             { /* List items should get the className `editing` when editing and `completed` when marked as completed */ }
-            <li className="completed">
+            {
+              todos.map((todo, i) => (
+                <li key={i}>
+                  <div className="view">
+                    <input className="toggle" type="checkbox" />
+                    <label>{todo}</label>
+                    <button className="destroy"></button>
+                  </div>
+                  <input className="edit"/>
+                </li>
+              ))
+            }
+            {/* <li className="completed">
               <div className="view">
-                <input className="toggle" type="checkbox" checked />
+                <input className="toggle" type="checkbox" />
                 <label>Taste JavaScript</label>
                 <button className="destroy"></button>
               </div>
-              <input className="edit" value="Create a TodoMVC template" />
+              <input className="edit" />
             </li>
             <li>
               <div className="view">
@@ -24,8 +36,8 @@ export default function Main({ todos }: Readonly<{ todos: string[] | never[] }>)
                 <label>Buy a unicorn</label>
                 <button className="destroy"></button>
               </div>
-              <input className="edit" value="Rule the web" />
-            </li>
+              <input className="edit" />
+            </li> */}
           </ul>
         </section>
       </>
