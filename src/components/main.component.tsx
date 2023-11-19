@@ -1,4 +1,4 @@
-export default function Main({ todos }: Readonly<{ todos: string[] | never[] }>) {
+export default function Main({ todos }: Readonly<{ todos: any }>) {
   return !todos.length
     ? <></>
     : (
@@ -11,11 +11,11 @@ export default function Main({ todos }: Readonly<{ todos: string[] | never[] }>)
             { /* These are here just to show the structure of the list items */ }
             { /* List items should get the className `editing` when editing and `completed` when marked as completed */ }
             {
-              todos.map((todo, i) => (
-                <li key={i}>
+              todos.map((todo: any) => (
+                <li key={todo.id}>
                   <div className="view">
                     <input className="toggle" type="checkbox" />
-                    <label>{todo}</label>
+                    <label>{todo.value}</label>
                     <button className="destroy"></button>
                   </div>
                   <input className="edit"/>

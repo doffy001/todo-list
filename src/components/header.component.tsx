@@ -1,9 +1,14 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export default function Header({ todos, setTodos }: Readonly<{ todos: any, setTodos: any }>) {
   const handleKeydown = function(e: any): void {
     if (e.key === 'Enter') {
       const newTodos = [
         ...todos,
-        e.target.value.trim(),
+        {
+          id: uuidv4(),
+          value: e.target.value.trim()
+        },
       ]
       setTodos(newTodos);
       e.target.value = '';
