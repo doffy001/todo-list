@@ -1,15 +1,24 @@
+import cn from 'classnames';
+
 export default function Main({ todos, setTodos, isAllCompleted }: Readonly<{ todos: any, setTodos: any, isAllCompleted: boolean }>) {
   const handleToggleAll = (): void => {
-    setTodos(todos.map((todo: any) => ({
+    setTodos(todos.map((todo: any): any => ({
       ...todo,
       isCompleted: !isAllCompleted,
     })))
   }
 
   const handleToggleTodoItem = (i: number): void => {
-    setTodos(todos.map((todo: any, j: number) => ({
+    setTodos(todos.map((todo: any, j: number): any => ({
       ...todo,
       isCompleted: (i === j ? !todo.isCompleted : todo.isCompleted),
+    })))
+  }
+
+  const handleDbClickTodoItem = (i: number): void => {
+    setTodos(todos.map((todo: any, j: number): any => ({
+      ...todo,
+      isEditing: (i === j ? !todo.isEditing : todo.isEditing),
     })))
   }
 
@@ -34,7 +43,10 @@ export default function Main({ todos, setTodos, isAllCompleted }: Readonly<{ tod
               todos.map((todo: any, i: number) => (
                 <li
                   key={todo.id}
-                  className={todo.isCompleted ? 'completed' : ''}
+                  className={cn({
+                    'completed': isAllCompleted,
+                    'editing': todo.isEditing,
+                  })}
                 >
                   <div className="view">
                     <input
@@ -43,7 +55,7 @@ export default function Main({ todos, setTodos, isAllCompleted }: Readonly<{ tod
                       checked={todo.isCompleted}
                       onChange={() => {handleToggleTodoItem(i)}}
                     />
-                    <label>{todo.value}</label>
+                    <label onDoubleClick={() => {handleDbClickTodoItem(i)}}>{todo.value}</label>
                     <button className="destroy"></button>
                   </div>
                   <input className="edit"/>

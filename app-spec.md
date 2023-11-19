@@ -12,7 +12,7 @@ New todos are entered in the input at the top of the app. The input element shou
 
 This checkbox toggles all the todos to the same state as itself. Make sure to clear the checked state after the "Clear completed" button is clicked. The "Mark all as complete" checkbox should also be updated when single todo items are checked/unchecked. Eg. When all the todos are checked it should also get checked.
 
-### 4. Item (Ready to go)
+### 4. Item => Done
 
 A todo item has three possible interactions:
 

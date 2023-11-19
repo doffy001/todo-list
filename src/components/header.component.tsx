@@ -9,6 +9,7 @@ export default function Header({ todos, setTodos }: Readonly<{ todos: any, setTo
           id: uuidv4(),
           value: e.target.value.trim(),
           isCompleted: false,
+          isEditing: false,
         },
       ]
       setTodos(newTodos);
