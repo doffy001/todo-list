@@ -8,7 +8,7 @@ When there are no todos, `#main` and `#footer` should be hidden.
 
 New todos are entered in the input at the top of the app. The input element should be focused when the page is loaded, preferably by using the `autofocus` input attribute. Pressing Enter creates the todo, appends it to the todo list, and clears the input. Make sure to `.trim()` the input and then check that it's not empty before creating a new todo.
 
-### 3. Mark all as complete (Ready to go)
+### 3. Mark all as complete => Done
 
 This checkbox toggles all the todos to the same state as itself. Make sure to clear the checked state after the "Clear completed" button is clicked. The "Mark all as complete" checkbox should also be updated when single todo items are checked/unchecked. Eg. When all the todos are checked it should also get checked.
 

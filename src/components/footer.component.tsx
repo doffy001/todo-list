@@ -1,4 +1,11 @@
-export default function Footer({ todos }: Readonly<{ todos: string[] | never[] }>) {
+export default function Footer({ todos, setTodos }: Readonly<{ todos: any, setTodos: any }>) {
+  const handleClearCompleted = (): void => {
+    setTodos(todos.map((todo: any) => ({
+      ...todo,
+      isCompleted: false,
+    })))
+  }
+
   return !todos.length
     ? <></>
     : (
@@ -20,7 +27,12 @@ export default function Footer({ todos }: Readonly<{ todos: string[] | never[] }
             </li>
           </ul>
           { /* Hidden if no completed items are left ↓ */ }
-          <button className="clear-completed">Clear completed</button>
+          <button
+            className="clear-completed"
+            onClick={handleClearCompleted}
+          >
+            Clear completed
+          </button>
         </footer>
       </>
     )
