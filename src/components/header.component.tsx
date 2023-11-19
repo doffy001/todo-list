@@ -1,4 +1,4 @@
-export default function Header() {
+export default function Header({ todos }: Readonly<{ todos: string[] | never[] }>) {
   return (
     <header className="header">
       <h1>todos</h1>
