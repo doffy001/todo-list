@@ -29,6 +29,23 @@ export default function Main({ todos, setTodos, isAllCompleted }: Readonly<{ tod
     })))
   }
 
+  const handleSaveValue = (e: any, i: number): void => {
+    if (e.type !== 'blur' && e.key !== 'Enter' && e.key !== 'Escape') return;
+    const newValue = e.key === 'Escape' ? '' : e.target?.value.trim();
+    setTodos(todos.map((todo: any, j: number): any => {
+      return i === j
+      ? {
+        ...todo,
+        value: newValue || todo.value,
+        isEditing: false,
+      }
+      : {
+        ...todo
+      }
+    }))
+    e.target.value = e.key === 'Escape' ? '': newValue;
+  }
+
   return !todos.length
     ? <></>
     : (
@@ -65,7 +82,12 @@ export default function Main({ todos, setTodos, isAllCompleted }: Readonly<{ tod
                     <label onDoubleClick={(e) => {handleDbClickTodoItem(e, i)}}>{todo.value}</label>
                     <button className="destroy"></button>
                   </div>
-                  <input className="edit"/>
+                  <input
+                    className="edit"
+                    onBlur={(e) => {handleSaveValue(e, i)}}
+                    onKeyDown={(e) => {handleSaveValue(e, i)}}
+                    defaultValue={todo.value}
+                  />
                 </li>
               ))
             }
