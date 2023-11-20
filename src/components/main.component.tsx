@@ -31,19 +31,39 @@ export default function Main({ todos, setTodos, isAllCompleted }: Readonly<{ tod
 
   const handleSaveValue = (e: any, i: number): void => {
     if (e.type !== 'blur' && e.key !== 'Enter' && e.key !== 'Escape') return;
-    const newValue = e.key === 'Escape' ? '' : e.target?.value.trim();
-    setTodos(todos.map((todo: any, j: number): any => {
-      return i === j
-      ? {
-        ...todo,
-        value: newValue || todo.value,
-        isEditing: false,
-      }
-      : {
-        ...todo
-      }
-    }))
-    e.target.value = e.key === 'Escape' ? '': newValue;
+    let isEscape: boolean = false;
+    if (e.type === 'blur' || e.key === 'Enter') {
+      if (!isEscape) {
+        const newValue = e.target?.value.trim();
+        setTodos(todos.map((todo: any, j: number): any => {
+          return i === j
+          ? {
+            ...todo,
+            value: newValue || todo.value,
+            isEditing: false,
+          }
+          : {
+            ...todo
+          }
+        }))
+        e.target.value = newValue;
+      };
+    } else if (e.key === 'Escape') {
+      isEscape = true;
+      const newValue = '';
+      setTodos(todos.map((todo: any, j: number): any => {
+        if (i === j) e.target.value = todo.value;
+        return i === j
+        ? {
+          ...todo,
+          value: newValue || todo.value,
+          isEditing: false,
+        }
+        : {
+          ...todo
+        }
+      }))
+    }
   }
 
   return !todos.length
