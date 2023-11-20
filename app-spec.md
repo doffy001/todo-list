@@ -26,11 +26,11 @@ A todo item has three possible interactions:
 
 When editing mode is activated it will hide the other controls and bring forward an input that contains the todo title, which should be focused (`.focus()`). The edit should be saved on both blur and enter, and the `editing` class should be removed. Make sure to `.trim()` the input and then check that it's not empty. If it's empty the todo should instead be destroyed. If escape is pressed during the edit, the edit state should be left and any changes be discarded.
 
-### 6. Counter (Ready to go)
+### 6. Counter => Done
 
 Displays the number of active todos in a pluralized form. Make sure the number is wrapped by a `<strong>` tag. Also make sure to pluralize the `item` word correctly: `0 items`, `1 item`, `2 items`. Example: **2** items left
 
-### 7. Clear completed button (Ready to go)
+### 7. Clear completed button => Done
 
 Removes completed todos when clicked. Should be hidden when there are no completed todos.
 

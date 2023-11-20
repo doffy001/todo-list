@@ -1,4 +1,9 @@
 export default function Footer({ todos, setTodos }: Readonly<{ todos: any, setTodos: any }>) {
+  const countTodoLeft: number = todos.reduce((acc: number, todo: any) => {
+    acc += (todo.isCompleted ? 0 : 1);
+    return acc;
+  }, 0)
+
   const handleClearCompleted = (): void => {
     setTodos(todos.map((todo: any) => ({
       ...todo,
@@ -13,7 +18,7 @@ export default function Footer({ todos, setTodos }: Readonly<{ todos: any, setTo
         { /* This footer should hidden by default and shown when there are todos */ }
         <footer className="footer">
           { /* This should be `0 items left` by default */ }
-          <span className="todo-count"><strong>0</strong> item left</span>
+          <span className="todo-count"><strong>{countTodoLeft}</strong> items left</span>
           { /* Remove this if you don't implement routing */ }
           <ul className="filters">
             <li>
