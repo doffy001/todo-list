@@ -1,7 +1,9 @@
+import { useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-export default function Header({ todos, setTodos }: Readonly<{ todos: any, setTodos: any }>) {
-  const handleKeydown = function(e: any): void {
+export default function Header({ todos, setTodos, saveToStorage }: Readonly<{ todos: any, setTodos: any, saveToStorage: () => void }>) {
+  const todoLength = todos.length;
+  const handleKeydown = (e: any): void => {
     if (e.key === 'Enter') {
       const newTodos = [
         ...todos,
@@ -16,6 +18,10 @@ export default function Header({ todos, setTodos }: Readonly<{ todos: any, setTo
       e.target.value = '';
     }
   }
+
+  useEffect(() => {
+    saveToStorage();
+  }, [todoLength])
 
   return (
     <header className="header">

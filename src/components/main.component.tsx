@@ -1,6 +1,6 @@
 import cn from 'classnames';
 
-export default function Main({ todos, setTodos, isAllCompleted }: Readonly<{ todos: any, setTodos: any, isAllCompleted: boolean }>) {
+export default function Main({ todos, setTodos, isAllCompleted, saveToStorage }: Readonly<{ todos: any, setTodos: any, isAllCompleted: boolean, saveToStorage: () => void }>) {
   const handleToggleAll = (): void => {
     setTodos(todos.map((todo: any): any => {
       return {
@@ -8,6 +8,7 @@ export default function Main({ todos, setTodos, isAllCompleted }: Readonly<{ tod
         isCompleted: !isAllCompleted,
       }
     }))
+    saveToStorage();
   }
 
   const handleToggleTodoItem = (i: number): void => {
@@ -17,6 +18,7 @@ export default function Main({ todos, setTodos, isAllCompleted }: Readonly<{ tod
         isCompleted: (i === j ? !todo.isCompleted : todo.isCompleted),
       }
     }))
+    saveToStorage();
   }
 
   const handleDbClickTodoItem = (e: any, i: number): void => {
@@ -64,13 +66,20 @@ export default function Main({ todos, setTodos, isAllCompleted }: Readonly<{ tod
         }
       }))
     }
+    saveToStorage();
+  }
+
+  const handleRemoveItem = (i: number): void => {
+    const newTodos = [...todos];
+    newTodos.splice(i, 1);
+    setTodos(newTodos);
+    saveToStorage();
   }
 
   return !todos.length
     ? <></>
     : (
       <>
-        { /* This section should be hidden by default and shown when there are todos */ }
         <section className="main">
           <input
             id="toggle-all"
@@ -81,8 +90,6 @@ export default function Main({ todos, setTodos, isAllCompleted }: Readonly<{ tod
           />
           <label htmlFor="toggle-all">Mark all as complete</label>
           <ul className="todo-list">
-            { /* These are here just to show the structure of the list items */ }
-            { /* List items should get the className `editing` when editing and `completed` when marked as completed */ }
             {
               todos.map((todo: any, i: number) => (
                 <li
@@ -100,7 +107,10 @@ export default function Main({ todos, setTodos, isAllCompleted }: Readonly<{ tod
                       onChange={() => {handleToggleTodoItem(i)}}
                     />
                     <label onDoubleClick={(e) => {handleDbClickTodoItem(e, i)}}>{todo.value}</label>
-                    <button className="destroy"></button>
+                    <button
+                      className="destroy"
+                      onClick={(): void => {handleRemoveItem(i)}}
+                    ></button>
                   </div>
                   <input
                     className="edit"
@@ -111,22 +121,6 @@ export default function Main({ todos, setTodos, isAllCompleted }: Readonly<{ tod
                 </li>
               ))
             }
-            {/* <li className="completed">
-              <div className="view">
-                <input className="toggle" type="checkbox" />
-                <label>Taste JavaScript</label>
-                <button className="destroy"></button>
-              </div>
-              <input className="edit" />
-            </li>
-            <li>
-              <div className="view">
-                <input className="toggle" type="checkbox" />
-                <label>Buy a unicorn</label>
-                <button className="destroy"></button>
-              </div>
-              <input className="edit" />
-            </li> */}
           </ul>
         </section>
       </>
