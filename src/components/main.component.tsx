@@ -19,7 +19,10 @@ export default function Main({ todos, setTodos, isAllCompleted }: Readonly<{ tod
     }))
   }
 
-  const handleDbClickTodoItem = (i: number): void => {
+  const handleDbClickTodoItem = (e: any, i: number): void => {
+    setTimeout(() => {
+      e.target.closest('li').querySelector('.edit').focus();
+    }, 0);
     setTodos(todos.map((todo: any, j: number): any => ({
       ...todo,
       isEditing: (i === j ? !todo.isEditing : todo.isEditing),
@@ -59,7 +62,7 @@ export default function Main({ todos, setTodos, isAllCompleted }: Readonly<{ tod
                       checked={todo.isCompleted}
                       onChange={() => {handleToggleTodoItem(i)}}
                     />
-                    <label onDoubleClick={() => {handleDbClickTodoItem(i)}}>{todo.value}</label>
+                    <label onDoubleClick={(e) => {handleDbClickTodoItem(e, i)}}>{todo.value}</label>
                     <button className="destroy"></button>
                   </div>
                   <input className="edit"/>
