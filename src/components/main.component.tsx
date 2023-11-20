@@ -2,17 +2,21 @@ import cn from 'classnames';
 
 export default function Main({ todos, setTodos, isAllCompleted }: Readonly<{ todos: any, setTodos: any, isAllCompleted: boolean }>) {
   const handleToggleAll = (): void => {
-    setTodos(todos.map((todo: any): any => ({
-      ...todo,
-      isCompleted: !isAllCompleted,
-    })))
+    setTodos(todos.map((todo: any): any => {
+      return {
+        ...todo,
+        isCompleted: !isAllCompleted,
+      }
+    }))
   }
 
   const handleToggleTodoItem = (i: number): void => {
-    setTodos(todos.map((todo: any, j: number): any => ({
-      ...todo,
-      isCompleted: (i === j ? !todo.isCompleted : todo.isCompleted),
-    })))
+    setTodos(todos.map((todo: any, j: number): any => {
+      return {
+        ...todo,
+        isCompleted: (i === j ? !todo.isCompleted : todo.isCompleted),
+      }
+    }))
   }
 
   const handleDbClickTodoItem = (i: number): void => {
@@ -44,7 +48,7 @@ export default function Main({ todos, setTodos, isAllCompleted }: Readonly<{ tod
                 <li
                   key={todo.id}
                   className={cn({
-                    'completed': isAllCompleted,
+                    'completed': todo.isCompleted,
                     'editing': todo.isEditing,
                   })}
                 >
