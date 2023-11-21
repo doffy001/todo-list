@@ -3,7 +3,7 @@ import './App.css';
 import { Home } from "./pages/index";
 
 export default function App() {
-  const savedTodos = localStorage.getItem('todos-react')
+  const savedTodos = localStorage.getItem('todos-react');
   const initTodos = savedTodos
     ? JSON.parse(savedTodos).map((todo: any) => {
       return {
@@ -11,15 +11,15 @@ export default function App() {
         isEditing: false,
       }
     })
-    : []
+    : [];
   const [todos, setTodos] = useState(initTodos);
   const isAllCompleted = !todos.some((todo: any) => !todo.isCompleted);
 
-  const saveToStorage = (): void => {
-    localStorage.setItem('todos-react', JSON.stringify(todos));
-  }
+  const saveToStorage = (latestTodos: any = todos): void => {
+    localStorage.setItem('todos-react', JSON.stringify(latestTodos));
+  };
 
   return (
     <Home todos={todos} setTodos={setTodos} isAllCompleted={isAllCompleted} saveToStorage={saveToStorage} />
   );
-}
+};

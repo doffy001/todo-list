@@ -16,7 +16,7 @@ This checkbox toggles all the todos to the same state as itself. Make sure to cl
 
 A todo item has three possible interactions:
 
-1. Clicking the checkbox marks the todo as complete by updating its `completed` value and toggling the class `completed` on its parent `<li>`
+1. Clicking the checkbox marks the todo as complete by updating its `isCompleted` value and toggling the class `completed` on its parent `<li>`
 
 2. Double-clicking the `<label>` activates editing mode, by toggling the `.editing` class on its `<li>`
 
@@ -34,9 +34,9 @@ Displays the number of active todos in a pluralized form. Make sure the number i
 
 Removes completed todos when clicked. Should be hidden when there are no completed todos.
 
-### 8. Persistence (Ready to go)
+### 8. Persistence => Done
 
-Your app should dynamically persist the todos to localStorage. If the framework has capabilities for persisting data (e.g. Backbone.sync), use that. Otherwise, use vanilla localStorage. If possible, use the keys `id`, `title`, `completed` for each item. Make sure to use this format for the localStorage name: `todos-[framework]`. Editing mode should not be persisted.
+Your app should dynamically persist the todos to localStorage. If the framework has capabilities for persisting data (e.g. Backbone.sync), use that. Otherwise, use vanilla localStorage. If possible, use the keys `id`, `value`, `isCompleted` for each item. Make sure to use this format for the localStorage name: `todos-[framework]`. Editing mode should not be persisted.
 
 ### 9. Routing (Ready to go)
 
